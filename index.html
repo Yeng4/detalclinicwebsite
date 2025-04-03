@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style>
+		body {
+			display: flex;
+			height: 100vh;
+			justify-content: center;
+			align-items: center;
+			background-color: #f0f2f5;
+			font-family: Arial, sans-serif;
+		}
+
+		.login-container {
+			background: #ffffff;
+			padding: 2rem;
+			border-radius: 12px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+			width: 100%;
+			max-width: 350px;
+		}
+
+		h2 {
+			text-align: center;
+			color: #4CAF50;
+
+		}
+		label {
+			display: block;
+			margin-top: 10px;
+			font-weight: bold;
+		}
+		input {
+			width: 100%;
+			padding: 8px;
+			margin-top: 5px;
+			border: 1px solid #ccc;
+			border-radius: 6px;
+		}
+		button {
+			width: 100%;
+			padding: 10px;
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			border-radius: 6px;
+			margin-top: 15px;
+			cursor: pointer;
+			transition: background 0.3s ease;
+
+		}
+
+		button:disabled {
+			background-color: #a5d6a7;
+			cursor: not-allowed;
+		}
+		#error-msg {
+			color: red;
+			text-align: center;
+			margin-top: 10px;
+			font-weight: bold;
+		}
+
+	</style>
+
+</head>
+<body>
+
+<body>
+
+	<div class="login-container"> 
+		<h2>Login</h2>
+		<form id="loginForm">
+			<label for ="username">Username:</label>
+			<input type="text" id ="username" required>
+			<label for="password">Password:</label>
+			<input type="password" id="password" required>
+			<button type="submit" id="loginBtn">Login</button>
+			<p id="error-msg"></p>
+		</form>
+	</div>
+	<script type="text/javascript">
+		const validUsername = "admin123";
+		const validPassword = "admin123";
+		let lockoutTimer = 0;
+		document.getElementById("loginForm").addEventListener("submit", function(e)) {
+			e.preventDefault();
+			const username= document.getElementById("username").value;
+			const password= document.getElementById("password").value;
+			const error-Msg=document.getElementById("error-msg");
+			const loginBtn=document.getElementById("loginBtn");
+			if (lockoutTimer > 0) {
+				errorMsg.textContent = "Too many attempts. Try again in ${lockoutTimer}seconds.";
+				return;
+			}
+
+			if (username === validUsername && password === validPassword) {
+				alert("Login successful! Redirecting to homepage...");
+				window.location.href = "E:\SANTOS-2E\AICYEN SANTOS\brightsmile.html";
+
+			} else {
+				errorMsg.textContent ="Incorrect username or password. Please try again.";
+				lockoutTimer = 10;
+				loginBtn.disabled = true;
+
+				const timeInterval = setInterval (() => {
+					lockoutTimer--;
+					if (lockoutTimer <= 0) {
+						clearInterval(timeInterval);
+						errorMsg.textContent = " ";
+						loginBtn.disabled = false;
+					} else {
+						errorMs.textContent = "Too many attempts. Try again in ${lockoutTimer}seconds.";
+					}
+				}, 1000);
+			}
+		});
+	</script>
+</body>
+</html>
